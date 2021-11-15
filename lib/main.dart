@@ -11,16 +11,6 @@ void main() => runApp(
 );
 
 class Home extends StatefulWidget {
-  var temp;
-  var description;
-  var currently;
-  var humidity;
-  var windSpeed;
-
-  Future getWeather () async {
-    http.Response response = await http.get()
-  }
-
   @override
   State<StatefulWidget> createState() {
     return _HomeState();
@@ -28,6 +18,27 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var temp;
+  var description;
+  var humidity;
+  var windSpeed;
+
+  Future getWeather () async {
+    http.Response response = await http.get(Uri.parse("http://api.weatherapi.com/v1/current.json?key=fea69b4e481a47d5972153151212709&q=paris"));
+    var results = jsonDecode(response.body);
+    setState(() {
+      this.temp = results['current']['temp_c'];
+      this.description = results['current']['condition']['text'];
+      this.humidity = results['current']['humidity'];
+      this.windSpeed = results['current']['wind_kph'];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.getWeather();
+  }
   @override
   Widget build (BuildContext context) {
     return Scaffold(
@@ -53,7 +64,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  "20\u00B0",
+                  temp != null ? temp.toString() + "\u00B0" : "Loading",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 40.0,
@@ -82,22 +93,22 @@ class _HomeState extends State<Home> {
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.thermometerHalf),
                     title: Text("Temperature"),
-                    trailing: Text("52\u00B0"),
+                    trailing: Text(temp != null ? temp.toString() + "\u00B0" : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.cloud),
                     title: Text("Weather"),
-                    trailing: Text("Weather..."),
+                    trailing: Text(description != null ? description.toString() + "\u00B0" : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.sun),
-                    title: Text("TemperaHumidityture"),
-                    trailing: Text("12"),
+                    title: Text("Humidity"),
+                    trailing: Text(humidity != null ? humidity.toString() + "\u00B0" : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.wind),
                     title: Text("Wind Speed"),
-                    trailing: Text("20"),
+                    trailing: Text(windSpeed != null ? windSpeed.toString() + "\u00B0" : "Loading"),
                   ),
                 ],
               ),
