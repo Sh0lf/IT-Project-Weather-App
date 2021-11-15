@@ -1,6 +1,6 @@
-# android_studio_projects
+# IT Project ISEP I2
 
-A new Flutter project.
+A new Flutter project. We are making a Weather App with Dart/Flutter
 
 ## Getting Started
 
