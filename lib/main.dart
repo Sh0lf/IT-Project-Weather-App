@@ -54,10 +54,10 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    "Currently in",
+                    "Currently in Paris",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 14.9,
@@ -67,17 +67,17 @@ class _HomeState extends State<Home> {
                 ),
                 Text(
                   temp != null ? temp.toString() + "\u00B0" : "Loading",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 40.0,
                       fontWeight: FontWeight.w600
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: Text(
                     "Updated time:" + updateTime != null ? updateTime.toString() + "\u00B0" : "Loading",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize:14.0,
                         fontWeight: FontWeight.w600
@@ -88,33 +88,33 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: ListView(
-                children: <Widget> [
-                  ListTile(
-                    leading: FaIcon(FontAwesomeIcons.thermometerHalf),
-                    title: Text("Temperature"),
-                    trailing: Text(temp != null ? temp.toString() + "\u00B0" : "Loading"),
-                  ),
-                  ListTile(
-                    leading: FaIcon(FontAwesomeIcons.cloud),
-                    title: Text("Weather"),
-                    trailing: Text(description != null ? description.toString() + "\u00B0" : "Loading"),
-                  ),
-                  ListTile(
-                    leading: FaIcon(FontAwesomeIcons.sun),
-                    title: Text("Humidity"),
-                    trailing: Text(humidity != null ? humidity.toString() + "\u00B0" : "Loading"),
-                  ),
-                  ListTile(
-                    leading: FaIcon(FontAwesomeIcons.wind),
-                    title: Text("Wind Speed"),
-                    trailing: Text(windSpeed != null ? windSpeed.toString() + "\u00B0" : "Loading"),
-                  ),
-                ],
-              ),
-            )
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ListView(
+                  children: <Widget> [
+                    ListTile(
+                      leading: const FaIcon(FontAwesomeIcons.thermometerHalf),
+                      title: const Text("Temperature"),
+                      trailing: Text(temp != null ? temp.toString() + "\u00B0" : "Loading"),
+                    ),
+                    ListTile(
+                      leading: const FaIcon(FontAwesomeIcons.cloud),
+                      title: const Text("Weather"),
+                      trailing: Text(description != null ? description.toString() + "" : "Loading"),
+                    ),
+                    ListTile(
+                      leading: const FaIcon(FontAwesomeIcons.sun),
+                      title: const Text("Humidity"),
+                      trailing: Text(humidity != null ? humidity.toString() + "%" : "Loading"),
+                    ),
+                    ListTile(
+                      leading: const FaIcon(FontAwesomeIcons.wind),
+                      title: const Text("Wind Speed"),
+                      trailing: Text(windSpeed != null ? windSpeed.toString() + "kmph" : "Loading"),
+                    ),
+                  ],
+                ),
+              )
           )
         ],
       ),
