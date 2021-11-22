@@ -22,22 +22,24 @@ class _HomeState extends State<Home> {
   var description;
   var humidity;
   var windSpeed;
+  var updateTime;
 
-  Future getWeather () async {
-    http.Response response = await http.get(Uri.parse("http://api.weatherapi.com/v1/current.json?key=fea69b4e481a47d5972153151212709&q=paris"));
+  Future getWeather (city) async {
+    http.Response response = await http.get(Uri.parse("http://api.weatherapi.com/v1/current.json?key=fea69b4e481a47d5972153151212709&q="+city));
     var results = jsonDecode(response.body);
     setState(() {
       this.temp = results['current']['temp_c'];
       this.description = results['current']['condition']['text'];
       this.humidity = results['current']['humidity'];
       this.windSpeed = results['current']['wind_kph'];
+      this.updateTime = results['current']['last_updated'];
     });
   }
 
   @override
   void initState() {
     super.initState();
-    this.getWeather();
+    this.getWeather("Paris");
   }
   @override
   Widget build (BuildContext context) {
@@ -55,7 +57,7 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    "Currently in Boston",
+                    "Currently in",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 14.9,
@@ -74,7 +76,7 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: EdgeInsets.only(top: 10.0),
                   child: Text(
-                    "Rain",
+                    "Updated time:" + updateTime != null ? updateTime.toString() + "\u00B0" : "Loading",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize:14.0,
