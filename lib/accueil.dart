@@ -20,6 +20,7 @@ class FirstPage_data extends State<FirstPage> {
   String _ip = ""; // variable pour récuperer l'ip du serveur
   var temp;
   var humidity;
+  var time="";
 
   Future<void> _loadData() async {
     // fonction pour récuperer les données du serveur
@@ -39,6 +40,7 @@ class FirstPage_data extends State<FirstPage> {
         // on modifie les variables avec les valeurs retournées par le serveur
         this.temp = results['temperature'];
         this.humidity = results['humidity'];
+        this.time = results['date'];
       });
     } else if (response.statusCode == 601) { // si le code est 601
       Fluttertoast.showToast( // on affiche un message pour dire d'attendre avant de rafraichir
@@ -125,6 +127,18 @@ class FirstPage_data extends State<FirstPage> {
                           color: Colors.white,
                           fontSize: 40.0,
                           fontWeight: FontWeight.w600),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "Updated time:" + time != ""
+                            ? time.toString()
+                            : "Loading",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ],
                 ),
